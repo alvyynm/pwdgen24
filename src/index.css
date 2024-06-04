@@ -24,3 +24,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+
+h1 {
+  color: #6c6a79;
+}
