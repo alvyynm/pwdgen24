@@ -84,7 +84,7 @@ function App() {
           </div>
           <div className="bg-[#24232a] flex flex-col gap-3 h-full">
             <div className="flex flex-row items-center justify-between bg-[#24232a] h-12 px-3">
-              <span>Character Length</span>
+              <span className="text-[#a4ffaf]">Character Length</span>
               <span>{passwordLength}</span>
             </div>
             <div className="px-3">
