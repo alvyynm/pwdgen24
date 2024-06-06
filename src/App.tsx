@@ -1,16 +1,21 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CopyButton from "./components/CopyToClipboard";
 import { GeneratePassword } from "./utils/GeneratePassword";
+import { CheckPasswordStrength } from "./utils/CheckPasswordStrength";
 
 function App() {
   const [password, setPassword] = useState("PTXCECECExeceddd");
   const [passwordLength, setPasswordLength] = useState(10);
-  const [passwordStrength, setPasswordStrength] = useState(0);
+  const [passwordStrength, setPasswordStrength] = useState("");
   const [includeSymbols, setIncludeSymbols] = useState(false);
   const [includeNumbers, setIncludeNumbers] = useState(false);
   const [includeUppercase, setIncludeUppercase] = useState(false);
   const [includeLowercase, setIncludeLowercase] = useState(false);
+
+  useEffect(() => {
+    setPasswordStrength(CheckPasswordStrength(password));
+  }, [password]);
 
   // state change functions
   const handleLowercaseCheckboxChange = (event) => {
@@ -110,7 +115,7 @@ function App() {
                 <span className="font-bold text-[#4b4a53] text-sm">
                   STRENGTH
                 </span>
-                <span className="font-medium">MEDIUM MTR6</span>
+                <span className="font-medium">{passwordStrength} MTR6</span>
               </div>
             </div>
             <div className="px-3">
