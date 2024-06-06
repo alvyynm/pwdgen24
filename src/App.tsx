@@ -10,8 +10,8 @@ function App() {
   const [passwordStrength, setPasswordStrength] = useState("");
   const [includeSymbols, setIncludeSymbols] = useState(false);
   const [includeNumbers, setIncludeNumbers] = useState(false);
-  const [includeUppercase, setIncludeUppercase] = useState(false);
-  const [includeLowercase, setIncludeLowercase] = useState(false);
+  const [includeUppercase, setIncludeUppercase] = useState(true);
+  const [includeLowercase, setIncludeLowercase] = useState(true);
 
   useEffect(() => {
     setPasswordStrength(CheckPasswordStrength(password));
@@ -70,6 +70,7 @@ function App() {
                   type="checkbox"
                   name="uppercase"
                   id="uppercase"
+                  defaultChecked={includeUppercase}
                   checked={includeUppercase}
                   onChange={handleUppercaseCheckboxChange}
                   className="mr-3 accent-[#a4ffaf]"
@@ -81,6 +82,7 @@ function App() {
                   type="checkbox"
                   name="lowercase"
                   id="lowercase"
+                  defaultChecked={includeLowercase}
                   checked={includeLowercase}
                   onChange={handleLowercaseCheckboxChange}
                   className="mr-3 accent-[#a4ffaf]"
