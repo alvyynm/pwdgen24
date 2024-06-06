@@ -39,6 +39,40 @@ function App() {
     setPasswordLength(event.target.value);
   };
 
+  const renderStrengthIndicators = () => {
+    if (passwordStrength === "WEAK" || passwordStrength === "TOO WEAK") {
+      return (
+        <span className="flex flex-row">
+          <LuRectangleVertical className="text-sm" />
+          <LuRectangleVertical className="text-sm" />
+          <LuRectangleVertical className="text-sm" />
+          <LuRectangleVertical className="text-sm" />
+        </span>
+      );
+    } else if (passwordStrength === "MEDIUM") {
+      return (
+        <span className="flex flex-row">
+          <LuRectangleVertical className="text-sm text-[#f9cb66]  fill-[#f9cb66]" />
+          <LuRectangleVertical className="text-sm text-[#f9cb66]  fill-[#f9cb66]" />
+          <LuRectangleVertical className="text-sm text-[#f9cb66]  fill-[#f9cb66]" />
+          <LuRectangleVertical className="text-sm" />
+        </span>
+      );
+    } else if (passwordStrength === "STRONG") {
+      return (
+        <span className="flex flex-row">
+          <LuRectangleVertical className="text-sm fill-[#a4ffaf] text-[#a4ffaf]" />
+          <LuRectangleVertical className="text-sm fill-[#a4ffaf] text-[#a4ffaf]" />
+          <LuRectangleVertical className="text-sm fill-[#a4ffaf] text-[#a4ffaf]" />
+          <LuRectangleVertical className="text-sm fill-[#a4ffaf] text-[#a4ffaf]" />
+          <LuRectangleVertical className="text-sm fill-[#a4ffaf] text-[#a4ffaf]" />
+        </span>
+      );
+    } else {
+      return null;
+    }
+  };
+
   return (
     <>
       <main className="flex flex-col gap-3">
@@ -120,12 +154,7 @@ function App() {
                 </span>
                 <span className="font-medium flex flex-row items-center gap-2">
                   {passwordStrength === "TOO WEAK" ? "WEAK" : passwordStrength}{" "}
-                  <span className="flex flex-row">
-                    <LuRectangleVertical className="text-sm" />
-                    <LuRectangleVertical className="text-sm" />
-                    <LuRectangleVertical className="text-sm" />
-                    <LuRectangleVertical className="text-sm" />
-                  </span>
+                  {renderStrengthIndicators()}
                 </span>
               </div>
             </div>
