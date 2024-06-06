@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
+import { LuRectangleVertical } from "react-icons/lu";
 import CopyButton from "./components/CopyToClipboard";
 import { GeneratePassword } from "./utils/GeneratePassword";
 import { CheckPasswordStrength } from "./utils/CheckPasswordStrength";
@@ -117,7 +118,15 @@ function App() {
                 <span className="font-bold text-[#4b4a53] text-sm">
                   STRENGTH
                 </span>
-                <span className="font-medium">{passwordStrength} MTR6</span>
+                <span className="font-medium flex flex-row items-center gap-2">
+                  {passwordStrength}{" "}
+                  <span className="flex flex-row">
+                    <LuRectangleVertical className="text-sm" />
+                    <LuRectangleVertical className="text-sm" />
+                    <LuRectangleVertical className="text-sm" />
+                    <LuRectangleVertical className="text-sm" />
+                  </span>
+                </span>
               </div>
             </div>
             <div className="px-3">
