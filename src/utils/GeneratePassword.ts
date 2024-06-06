@@ -1,12 +1,23 @@
 import { lowercase, uppercase, numbers, symbols } from "../data";
 export const GeneratePassword = (length, ...num) => {
   let generatedPassword = "";
-  const options = [uppercase, lowercase, symbols, numbers];
+  let charSet = "";
+  if (num[0]) {
+    charSet += lowercase;
+  }
+  if (num[1]) {
+    charSet += uppercase;
+  }
+  if (num[2]) {
+    charSet += numbers;
+  }
+  if (num[3]) {
+    charSet += symbols;
+  }
   const generateRandomNumber = (len: number) => Math.floor(Math.random() * len);
-  const generateRandomLetter = () => Math.floor(Math.random() * 4);
   for (let i = 0; i < length; i++) {
-    const choice = options[generateRandomLetter()];
-    generatedPassword += choice[generateRandomNumber(choice.length)];
+    const randomIndex = generateRandomNumber(charSet.length);
+    generatedPassword += charSet.charAt(randomIndex);
   }
   return generatedPassword;
 };
