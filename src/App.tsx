@@ -119,7 +119,7 @@ function App() {
                   STRENGTH
                 </span>
                 <span className="font-medium flex flex-row items-center gap-2">
-                  {passwordStrength}{" "}
+                  {passwordStrength === "TOO WEAK" ? "WEAK" : passwordStrength}{" "}
                   <span className="flex flex-row">
                     <LuRectangleVertical className="text-sm" />
                     <LuRectangleVertical className="text-sm" />
