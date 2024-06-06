@@ -1,5 +1,5 @@
 import { lowercase, uppercase, numbers, symbols } from "../data";
-export const GeneratePassword = (length, ...num) => {
+export const GeneratePassword = (length: number, ...num: boolean[]) => {
   let generatedPassword = "";
   let charSet = "";
   if (num[0]) {
