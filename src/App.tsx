@@ -96,7 +96,7 @@ function App() {
                 onChange={handlePasswordLengthChange}
                 name="length"
                 id="length"
-                className="w-full cursor-pointer accent-[#a4ffaf] focus:border-blue-400"
+                className="range-input w-full cursor-pointer"
               />
             </div>
             <div className="text-start px-3 flex flex-col gap-2">
