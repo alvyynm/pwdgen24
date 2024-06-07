@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
+import { LuRectangleVertical } from "react-icons/lu";
 import CopyButton from "./components/CopyToClipboard";
 import { GeneratePassword } from "./utils/GeneratePassword";
 import { CheckPasswordStrength } from "./utils/CheckPasswordStrength";
@@ -10,8 +11,8 @@ function App() {
   const [passwordStrength, setPasswordStrength] = useState("");
   const [includeSymbols, setIncludeSymbols] = useState(false);
   const [includeNumbers, setIncludeNumbers] = useState(false);
-  const [includeUppercase, setIncludeUppercase] = useState(false);
-  const [includeLowercase, setIncludeLowercase] = useState(false);
+  const [includeUppercase, setIncludeUppercase] = useState(true);
+  const [includeLowercase, setIncludeLowercase] = useState(true);
 
   useEffect(() => {
     setPasswordStrength(CheckPasswordStrength(password));
@@ -38,6 +39,40 @@ function App() {
     setPasswordLength(event.target.value);
   };
 
+  const renderStrengthIndicators = () => {
+    if (passwordStrength === "WEAK" || passwordStrength === "TOO WEAK") {
+      return (
+        <span className="flex flex-row">
+          <LuRectangleVertical className="text-sm" />
+          <LuRectangleVertical className="text-sm" />
+          <LuRectangleVertical className="text-sm" />
+          <LuRectangleVertical className="text-sm" />
+        </span>
+      );
+    } else if (passwordStrength === "MEDIUM") {
+      return (
+        <span className="flex flex-row">
+          <LuRectangleVertical className="text-sm text-[#f9cb66]  fill-[#f9cb66]" />
+          <LuRectangleVertical className="text-sm text-[#f9cb66]  fill-[#f9cb66]" />
+          <LuRectangleVertical className="text-sm text-[#f9cb66]  fill-[#f9cb66]" />
+          <LuRectangleVertical className="text-sm" />
+        </span>
+      );
+    } else if (passwordStrength === "STRONG") {
+      return (
+        <span className="flex flex-row">
+          <LuRectangleVertical className="text-sm fill-[#a4ffaf] text-[#a4ffaf]" />
+          <LuRectangleVertical className="text-sm fill-[#a4ffaf] text-[#a4ffaf]" />
+          <LuRectangleVertical className="text-sm fill-[#a4ffaf] text-[#a4ffaf]" />
+          <LuRectangleVertical className="text-sm fill-[#a4ffaf] text-[#a4ffaf]" />
+          <LuRectangleVertical className="text-sm fill-[#a4ffaf] text-[#a4ffaf]" />
+        </span>
+      );
+    } else {
+      return null;
+    }
+  };
+
   return (
     <>
       <main className="flex flex-col gap-3">
@@ -50,7 +85,7 @@ function App() {
           <div className="bg-[#24232a] flex flex-col gap-3 h-full">
             <div className="flex flex-row items-center justify-between bg-[#24232a] h-12 px-3">
               <span>Character Length</span>
-              <span>{passwordLength}</span>
+              <span className="text-[#a4ffaf]">{passwordLength}</span>
             </div>
             <div className="px-3">
               <input
@@ -61,7 +96,7 @@ function App() {
                 onChange={handlePasswordLengthChange}
                 name="length"
                 id="length"
-                className="w-full cursor-pointer accent-[#a4ffaf] focus:border-blue-400"
+                className="range-input w-full cursor-pointer"
               />
             </div>
             <div className="text-start px-3 flex flex-col gap-2">
@@ -70,6 +105,7 @@ function App() {
                   type="checkbox"
                   name="uppercase"
                   id="uppercase"
+                  defaultChecked={includeUppercase}
                   checked={includeUppercase}
                   onChange={handleUppercaseCheckboxChange}
                   className="mr-3 accent-[#a4ffaf]"
@@ -81,6 +117,7 @@ function App() {
                   type="checkbox"
                   name="lowercase"
                   id="lowercase"
+                  defaultChecked={includeLowercase}
                   checked={includeLowercase}
                   onChange={handleLowercaseCheckboxChange}
                   className="mr-3 accent-[#a4ffaf]"
@@ -115,7 +152,10 @@ function App() {
                 <span className="font-bold text-[#4b4a53] text-sm">
                   STRENGTH
                 </span>
-                <span className="font-medium">{passwordStrength} MTR6</span>
+                <span className="font-medium flex flex-row items-center gap-2">
+                  {passwordStrength === "TOO WEAK" ? "WEAK" : passwordStrength}{" "}
+                  {renderStrengthIndicators()}
+                </span>
               </div>
             </div>
             <div className="px-3">
