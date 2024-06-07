@@ -1,0 +1,32 @@
+/* Custom CSS for range input */
+.range-input {
+  @apply appearance-none w-full h-2 bg-gray-200 cursor-pointer;
+}
+
+.range-input::-webkit-slider-runnable-track {
+  @apply w-full h-2 bg-[#18171f];
+}
+
+.range-input::-webkit-slider-thumb {
+  @apply appearance-none w-5 h-5 bg-white border-2 border-white rounded-full shadow-lg -mt-2 transition duration-200 ease-in-out;
+}
+
+.range-input:active::-webkit-slider-thumb {
+  @apply bg-[#18171f] border-2 border-[#a4ffaf] outline outline-1 outline-[#a4ffaf] transform scale-110;
+}
+
+.range-input::-moz-range-thumb {
+  @apply w-5 h-5 bg-white border-2 border-white rounded-full shadow-lg transition duration-200 ease-in-out;
+}
+
+.range-input:active::-moz-range-thumb {
+  @apply bg-[#18171f] border-2 border-[#a4ffaf] outline outline-1 outline-[#a4ffaf] transform scale-110;
+}
+
+.range-input::-ms-thumb {
+  @apply w-5 h-5 bg-white border-2 border-white rounded-full shadow-lg transition duration-200 ease-in-out;
+}
+
+.range-input:active::-ms-thumb {
+  @apply bg-[#18171f] border-2 border-[#a4ffaf] outline outline-1 outline-[#a4ffaf] transform scale-110;
+}
