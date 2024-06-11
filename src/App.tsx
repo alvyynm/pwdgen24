@@ -4,6 +4,7 @@ import { LuRectangleVertical } from "react-icons/lu";
 import CopyButton from "./components/CopyToClipboard";
 import { GeneratePassword } from "./utils/GeneratePassword";
 import { CheckPasswordStrength } from "./utils/CheckPasswordStrength";
+import useIsInitialMount from "./hooks/useIsInitialMount";
 
 function App() {
   const [password, setPassword] = useState("");
@@ -14,9 +15,15 @@ function App() {
   const [includeUppercase, setIncludeUppercase] = useState(true);
   const [includeLowercase, setIncludeLowercase] = useState(true);
 
+  const isInitialMount = useIsInitialMount();
+
   useEffect(() => {
-    setPasswordStrength(CheckPasswordStrength(password));
-  }, [password]);
+    if (isInitialMount) {
+      // do nothing
+    } else {
+      setPasswordStrength(CheckPasswordStrength(password));
+    }
+  }, [password, isInitialMount]);
 
   // state change functions
   const handleLowercaseCheckboxChange = (event) => {
