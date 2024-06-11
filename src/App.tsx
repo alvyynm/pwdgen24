@@ -118,7 +118,6 @@ function App() {
                   type="checkbox"
                   name="uppercase"
                   id="uppercase"
-                  defaultChecked={includeUppercase}
                   checked={includeUppercase}
                   onChange={handleUppercaseCheckboxChange}
                   className="mr-3 accent-[#a4ffaf]"
@@ -130,7 +129,6 @@ function App() {
                   type="checkbox"
                   name="lowercase"
                   id="lowercase"
-                  defaultChecked={includeLowercase}
                   checked={includeLowercase}
                   onChange={handleLowercaseCheckboxChange}
                   className="mr-3 accent-[#a4ffaf]"
