@@ -4,9 +4,10 @@ import { LuRectangleVertical } from "react-icons/lu";
 import CopyButton from "./components/CopyToClipboard";
 import { GeneratePassword } from "./utils/GeneratePassword";
 import { CheckPasswordStrength } from "./utils/CheckPasswordStrength";
+import useIsInitialMount from "./hooks/useIsInitialMount";
 
 function App() {
-  const [password, setPassword] = useState("PTXCECECExeceddd");
+  const [password, setPassword] = useState("");
   const [passwordLength, setPasswordLength] = useState(10);
   const [passwordStrength, setPasswordStrength] = useState("");
   const [includeSymbols, setIncludeSymbols] = useState(false);
@@ -14,9 +15,15 @@ function App() {
   const [includeUppercase, setIncludeUppercase] = useState(true);
   const [includeLowercase, setIncludeLowercase] = useState(true);
 
+  const isInitialMount = useIsInitialMount();
+
   useEffect(() => {
-    setPasswordStrength(CheckPasswordStrength(password));
-  }, [password]);
+    if (isInitialMount) {
+      // do nothing
+    } else {
+      setPasswordStrength(CheckPasswordStrength(password));
+    }
+  }, [password, isInitialMount]);
 
   // state change functions
   const handleLowercaseCheckboxChange = (event) => {
@@ -40,7 +47,11 @@ function App() {
   };
 
   const renderStrengthIndicators = () => {
-    if (passwordStrength === "WEAK" || passwordStrength === "TOO WEAK") {
+    if (
+      passwordStrength === "" ||
+      passwordStrength === "WEAK" ||
+      passwordStrength === "TOO WEAK"
+    ) {
       return (
         <span className="flex flex-row">
           <LuRectangleVertical className="text-sm" />
@@ -76,10 +87,12 @@ function App() {
   return (
     <>
       <main className="flex flex-col gap-3">
-        <h1 className="font-medium">Password Generator</h1>
+        <h1 className="font-bold text-xl">Password Generator</h1>
         <div className="flex flex-col gap-3 h-[420px] w-[300px]">
           <div className="flex flex-row items-center justify-between gap-10 bg-[#24232a] text-[#4b4a53] hover:text-white h-16 p-3">
-            <span className="font-bold">{password}</span>
+            <span className="font-bold text-xl">
+              {password ? password : "P4$5W0rD!"}
+            </span>
             <CopyButton text={password} />
           </div>
           <div className="bg-[#24232a] flex flex-col gap-3 h-full">
@@ -105,7 +118,6 @@ function App() {
                   type="checkbox"
                   name="uppercase"
                   id="uppercase"
-                  defaultChecked={includeUppercase}
                   checked={includeUppercase}
                   onChange={handleUppercaseCheckboxChange}
                   className="mr-3 accent-[#a4ffaf]"
@@ -117,7 +129,6 @@ function App() {
                   type="checkbox"
                   name="lowercase"
                   id="lowercase"
-                  defaultChecked={includeLowercase}
                   checked={includeLowercase}
                   onChange={handleLowercaseCheckboxChange}
                   className="mr-3 accent-[#a4ffaf]"
@@ -153,7 +164,10 @@ function App() {
                   STRENGTH
                 </span>
                 <span className="font-medium flex flex-row items-center gap-2">
-                  {passwordStrength === "TOO WEAK" ? "WEAK" : passwordStrength}{" "}
+                  {passwordStrength &&
+                    (passwordStrength === "TOO WEAK"
+                      ? "WEAK"
+                      : passwordStrength)}{" "}
                   {renderStrengthIndicators()}
                 </span>
               </div>
