@@ -76,7 +76,7 @@ function App() {
   return (
     <>
       <main className="flex flex-col gap-3">
-        <h1 className="font-medium">Password Generator</h1>
+        <h1 className="font-bold text-xl">Password Generator</h1>
         <div className="flex flex-col gap-3 h-[420px] w-[300px]">
           <div className="flex flex-row items-center justify-between gap-10 bg-[#24232a] text-[#4b4a53] hover:text-white h-16 p-3">
             <span className="font-bold">{password}</span>
