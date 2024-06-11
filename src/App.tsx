@@ -40,7 +40,11 @@ function App() {
   };
 
   const renderStrengthIndicators = () => {
-    if (passwordStrength === "WEAK" || passwordStrength === "TOO WEAK") {
+    if (
+      passwordStrength === "" ||
+      passwordStrength === "WEAK" ||
+      passwordStrength === "TOO WEAK"
+    ) {
       return (
         <span className="flex flex-row">
           <LuRectangleVertical className="text-sm" />
@@ -155,7 +159,10 @@ function App() {
                   STRENGTH
                 </span>
                 <span className="font-medium flex flex-row items-center gap-2">
-                  {passwordStrength === "TOO WEAK" ? "WEAK" : passwordStrength}{" "}
+                  {passwordStrength &&
+                    (passwordStrength === "TOO WEAK"
+                      ? "WEAK"
+                      : passwordStrength)}{" "}
                   {renderStrengthIndicators()}
                 </span>
               </div>
