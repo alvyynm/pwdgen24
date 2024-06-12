@@ -103,7 +103,7 @@ function App() {
             <div className="px-3">
               <input
                 type="range"
-                min={5}
+                min={0}
                 max={20}
                 defaultValue={10}
                 onChange={handlePasswordLengthChange}
