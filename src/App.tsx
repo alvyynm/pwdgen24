@@ -109,7 +109,12 @@ function App() {
                 onChange={handlePasswordLengthChange}
                 name="length"
                 id="length"
-                className="range-input w-full cursor-pointer"
+                className="slider"
+                style={{
+                  background: `linear-gradient(to right, #a4ffaf ${
+                    passwordLength * 5
+                  }%, #18171f ${passwordLength * 5}%)`,
+                }}
               />
             </div>
             <div className="text-start px-3 flex flex-col gap-2">
